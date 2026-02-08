@@ -1,4 +1,4 @@
-wait(10)
+wait(100000000000)
 
 local function teleportToTarget()
     -- Tween to Specific CFrame Position/Rotation
