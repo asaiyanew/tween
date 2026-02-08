@@ -1,0 +1,39 @@
+wait(10)
+
+-- Tween to Specific CFrame Position/Rotation
+local targetCFrame = CFrame.new(
+    1468.15527, 6852.75537, -12911.1221, -0.998313904, -1.48578694e-09, -0.0580464974, -1.91407357e-09, 1, 7.32273708e-09, 0.0580464974, 7.42149542e-09, -0.998313904
+)
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Check if TweenService is available
+if game:GetService("TweenService") then
+    local tweenService = game:GetService("TweenService")
+    
+    -- Create tween info
+    local tweenInfo = TweenInfo.new(
+        5, -- Duration (seconds)
+        Enum.EasingStyle.Linear, -- Easing style
+        Enum.EasingDirection.Out -- Easing direction
+    )
+    
+    -- Create tween
+    local tween = tweenService:Create(humanoidRootPart, tweenInfo, {CFrame = targetCFrame})
+    
+    -- Play tween
+    tween:Play()
+    
+    print("Tweening to position: " .. tostring(targetCFrame.Position))
+    print("Rotation applied. Duration: 5 seconds")
+    
+    -- Optional: Wait for tween to complete
+    tween.Completed:Wait()
+    print("Tween complete!")
+else
+    -- Fallback: Instantly teleport if TweenService isn't available
+    humanoidRootPart.CFrame = targetCFrame
+    print("Instantly teleported to position: " .. tostring(targetCFrame.Position))
+end
